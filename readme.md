@@ -6,13 +6,11 @@
 2. [System Architecture](#system-architecture)
 3. [Application Structure](#application-structure)
 4. [Database Design](#database-design)
-5. [Backend Components](#backend-components)
-6. [Frontend Components](#frontend-components)
-7. [API Endpoints](#api-endpoints)
-8. [Authentication System](#authentication-system)
-9. [Configuration](#configuration)
-10. [Deployment](#deployment)
-11. [Troubleshooting](#troubleshooting)
+5. [API Endpoints](#api-endpoints)
+6. [Authentication System](#authentication-system)
+7. [Configuration](#configuration)
+8. [Deployment](#deployment)
+9. [Troubleshooting](#troubleshooting)
 
 ---
 
