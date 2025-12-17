@@ -1,72 +1,130 @@
 <style>
-   .modal-content {
-   background-color: #212121
+   .temu-modal .modal-content {
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      animation: modalFadeUp 0.4s ease;
+   }
+
+   .temu-modal .modal-header {
+      border-bottom: none;
+      padding-bottom: 0;
+   }
+
+   .temu-modal .modal-title {
+      font-weight: 700;
+      color: #ff6a00;
+   }
+
+   .temu-modal .modal-body {
+      color: #444;
+   }
+
+   .temu-modal .modal-footer {
+      border-top: none;
+   }
+
+   .temu-btn-primary {
+      background: #ff6a00;
+      color: white;
+      border-radius: 30px;
+      padding: 8px 22px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+   }
+
+   .temu-btn-primary:hover {
+      background: #e85d00;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 106, 0, 0.35);
+   }
+
+   .temu-btn-secondary {
+      border-radius: 30px;
+      padding: 8px 22px;
+   }
+
+   @keyframes modalFadeUp {
+      from {
+         opacity: 0;
+         transform: translateY(30px);
+      }
+
+      to {
+         opacity: 1;
+         transform: translateY(0);
+      }
    }
 </style>
-<!-- More Info -->
-<div class="modal fade" id="Modal-MoreInfo-{{ item.id }}"
-   tabindex="-1"
-   aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
+
+<!-- MORE INFO MODAL -->
+<div class="modal fade temu-modal" id="Modal-MoreInfo-{{ item.id }}" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+
          <div class="modal-header">
-            <h5 class="modal-title" id="ModalLabel">
-               <!-- -->
-               {{ item.name }}
-            </h5>
-            <button type="button" class="close"
-               data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <h5 class="modal-title">{{ item.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal">
+               <span>&times;</span>
             </button>
          </div>
+
          <div class="modal-body">
-            {{ item.description }}
+            <p class="mb-0">
+               {{ item.description }}
+            </p>
          </div>
+
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-               data-dismiss="modal">Close
+            <button type="button" class="btn btn-secondary temu-btn-secondary" data-dismiss="modal">
+               Close
             </button>
          </div>
+
       </div>
    </div>
 </div>
-<!-- Purchase Confirm -->
-<div class="modal fade" id="Modal-PurchaseConfirm-{{ item.id }}"
-   tabindex="-1"
-   aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
+
+<!-- PURCHASE CONFIRM MODAL -->
+<div class="modal fade temu-modal" id="Modal-PurchaseConfirm-{{ item.id }}" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+
          <div class="modal-header">
-            <h5 class="modal-title" id="ModalLabel">
-               <!-- -->
-               {{ item.name }}
-            </h5>
-            <button type="button" class="close"
-               data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <h5 class="modal-title">{{ item.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal">
+               <span>&times;</span>
             </button>
          </div>
-         <div class="modal-body">
+
+         <div class="modal-body text-center">
             <form method="POST">
                {{ purchase_form.hidden_tag() }}
 
-               <h4 class="text-center">
-                  Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
-               </h4>
-               <br>
-               <h6 class="text-center">
-                  By clicking purchase, you will purchase this item.
-               </h6>
-               <br>
-               <input id="purchased_item" name="purchased_item" type="hidden" value="{{ item.name }}">
-               {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+               <h5 class="mb-3">
+                  Buy <strong>{{ item.name }}</strong> for
+                  <span style="color:#ff6a00; font-weight:700;">
+                     {{ item.price }}$
+                  </span>
+                  ?
+               </h5>
+
+               <p class="text-muted">
+                  This amount will be deducted from your balance.
+               </p>
+
+               <input type="hidden" name="purchased_item" value="{{ item.name }}">
+
+               {{ purchase_form.submit(class="btn temu-btn-primary btn-block mt-3") }}
             </form>
          </div>
+
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-               data-dismiss="modal">Close
+            <button type="button" class="btn btn-secondary temu-btn-secondary" data-dismiss="modal">
+               Cancel
             </button>
          </div>
+
       </div>
    </div>
 </div>

@@ -1,45 +1,102 @@
 <style>
-   .modal-content {
-   background-color: #212121
+   .temu-modal .modal-content {
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      animation: modalFadeUp 0.4s ease;
+   }
+
+   .temu-modal .modal-header {
+      border-bottom: none;
+      padding-bottom: 0;
+   }
+
+   .temu-modal .modal-title {
+      font-weight: 700;
+      color: #ff6a00;
+   }
+
+   .temu-modal .modal-body {
+      color: #444;
+   }
+
+   .temu-modal .modal-footer {
+      border-top: none;
+   }
+
+   .temu-btn-danger {
+      background: #dc3545;
+      color: white;
+      border-radius: 30px;
+      padding: 8px 22px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+   }
+
+   .temu-btn-danger:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(220, 53, 69, 0.35);
+   }
+
+   .temu-btn-secondary {
+      border-radius: 30px;
+      padding: 8px 22px;
+   }
+
+   @keyframes modalFadeUp {
+      from {
+         opacity: 0;
+         transform: translateY(30px);
+      }
+
+      to {
+         opacity: 1;
+         transform: translateY(0);
+      }
    }
 </style>
-<!-- Selling Confirm -->
-<div class="modal fade" id="Modal-SellingConfirm-{{ owned_item.id }}"
-   tabindex="-1"
-   aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
+
+<!-- SELL CONFIRM MODAL -->
+<div class="modal fade temu-modal" id="Modal-SellingConfirm-{{ owned_item.id }}" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
+
          <div class="modal-header">
-            <h5 class="modal-title" id="ModalLabel">
-               <!-- -->
-               {{ owned_item.name }}
-            </h5>
-            <button type="button" class="close"
-               data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <h5 class="modal-title">{{ owned_item.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal">
+               <span>&times;</span>
             </button>
          </div>
-         <div class="modal-body">
+
+         <div class="modal-body text-center">
             <form method="POST">
                {{ selling_form.hidden_tag() }}
-               
-               <h4 class="text-center">
-                  Are you sure you want to sell {{ owned_item.name }} for {{ owned_item.price }}$ ?
-               </h4>
-               <br>
-               <h6 class="text-center">
-                  By clicking Sell, you will put this item back on market
-               </h6>
-               <br>
-               <input id="sold_item" name="sold_item" type="hidden" value="{{owned_item.name}}">
-               {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+
+               <h5 class="mb-3">
+                  Sell <strong>{{ owned_item.name }}</strong> for
+                  <span style="color:#ff6a00; font-weight:700;">
+                     {{ owned_item.price }}$
+                  </span>
+                  ?
+               </h5>
+
+               <p class="text-muted">
+                  This item will be returned to the market.
+               </p>
+
+               <input type="hidden" name="sold_item" value="{{ owned_item.name }}">
+
+               {{ selling_form.submit(class="btn temu-btn-danger btn-block mt-3") }}
             </form>
          </div>
+
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-               data-dismiss="modal">Close
+            <button type="button" class="btn btn-secondary temu-btn-secondary" data-dismiss="modal">
+               Cancel
             </button>
          </div>
+
       </div>
    </div>
 </div>
