@@ -55,6 +55,7 @@ The application provides:
 - CSS3
 - Jinja2 (Templating)
 - Bootstrap (Optional, for UI components)
+- JavaScript
 
 ### Application Flow
 
